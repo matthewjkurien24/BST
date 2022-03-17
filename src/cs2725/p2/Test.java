@@ -121,6 +121,38 @@ public class Test {
 
 		bst.insert(5);
 		bst.insert(6);
+		bst.insert(7);
+		bst.insert(8);
+		bst.insert(9);
+		bst.insert(10);
+		bst.insert(11);
+		bst.insert(5);
+
+		BST bst1 = new BST();
+		bst1.insert(5);
+		bst1.insert(10);
+		bst1.insert(15);
+		bst1.insert(7);
+		bst1.insert(20);
+
+		System.out.println("\nNew");
+
+		BST bst2 = new BST();
+		bst2.insert(20);
+		bst2.insert(10);
+		bst2.insert(5);
+		bst2.insert(3);
+		bst2.insert(7);
+		bst2.insert(15);
+		bst2.insert(13);
+		bst2.insert(17);
+		bst2.insert(30);
+		bst2.insert(25);
+		bst2.insert(23);
+		bst2.insert(27);
+		bst2.insert(35);
+		bst2.insert(33);
+		bst2.insert(37);
 
 
 

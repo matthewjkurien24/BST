@@ -14,7 +14,6 @@ class Node {
 	 * Construct a node with key -1, null parent, and null right/left node
 	 */
 	public Node() {
-		
 		this.key = -1;
 		this.parent = null;
 		this.leftChild = null;
@@ -100,6 +99,7 @@ class Node {
 	} // setRight
 } // Node
 
+
 /**
  * Class representing the binary search tree object
  */
@@ -145,6 +145,7 @@ public class BST {
 		// Traverse BST
 		while (found == false) {
 			// Check Left
+			System.out.println(node.getKey()); // ------ Debug -------
 			if (element < node.getKey()) {
 				if (node.getLeft() != null) {
 					node = node.getLeft();
@@ -163,8 +164,8 @@ public class BST {
 				System.out.println("Element is already in tree!");
 				found = true;
 			} // if else if else if
-			// System.out.println(node.getKey()); // ------ Debug -------
 		} // while not found
+		System.out.println();
 
 		// Add new element
 		if (element < node.getKey()) {
