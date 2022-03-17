@@ -14,6 +14,7 @@ class Node {
 	 * Construct a node with key -1, null parent, and null right/left node
 	 */
 	public Node() {
+		
 		this.key = -1;
 		this.parent = null;
 		this.leftChild = null;
@@ -128,8 +129,55 @@ public class BST {
 	 * If duplicate found, print
 	 * "Element is already in tree!"
 	 */
-	public void insert(int element) throws NoSuchMethodException {
-		throw new NoSuchMethodException("Implement");
+	public void insert(int element) {
+		Node node = this.root;
+		boolean found = false;
+		Node newNode = new Node(element);
+
+		// Empty BST Case
+		if (this.counter == 0) {
+			this.root = newNode;
+			this.counter++;
+			found = true;
+			return;
+		} // if
+
+		// Traverse BST
+		while (found == false) {
+			// Check Left
+			if (element < node.getKey()) {
+				if (node.getLeft() != null) {
+					node = node.getLeft();
+				} else {
+					found = true;
+				} // if else
+			// Check Right
+			} else if (element > node.getKey()) {
+				if (node.getRight() != null) {
+					node = node.getRight();
+				} else {
+					found = true;
+				} // if else
+			// Check Duplicate
+			} else if (element == node.getKey()) {
+				System.out.println("Element is already in tree!");
+				found = true;
+			} // if else if else if
+			// System.out.println(node.getKey()); // ------ Debug -------
+		} // while not found
+
+		// Add new element
+		if (element < node.getKey()) {
+			// Add Left
+			node.setLeft(newNode);
+			newNode.setParent(node);
+			this.counter ++;
+		} else {
+			// Add Right
+			node.setRight(newNode);
+			newNode.setParent(node);
+			this.counter ++;
+		} // if else
 	} // insert
 
 	/**

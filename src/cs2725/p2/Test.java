@@ -119,6 +119,8 @@ public class Test {
 			System.out.println("Failed, Size=" + bst.size());
 		} // if else
 
+		bst.insert(5);
+		bst.insert(6);
 
 
 
