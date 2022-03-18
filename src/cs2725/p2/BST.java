@@ -187,22 +187,11 @@ public class BST {
 	 * "Element not found"
 	 */
 	public void delete(int element) {
-		// Traverse to parent of node
-		// If target node left && right child = null, set target node to null
-		// else, if node has one child, replace the node to be deleted with its child
-		// else, find the node whose element immediately precedes that node to be deleted
-		// Replace the node to be deleted with the node that immediately precedes it
-
-		// Or do we replace the node with the largest element in the subtree?????
-		// Are they the same
-
-		// Slide 39 BST_Tree Traversal on eLC:
-		// Deleting a node with two children:
-		// Replace with Maximum node in the left subtree, or 
-		// the Minimum node with the right subtree.
 		if (this.counter == 0) {
+			// Empty Tree
 			System.out.println("Element not found");
 		} else if (this.counter == 1) {
+			// Tree with 1 node
 			if (this.root.getKey() == element) {
 				this.root = null;
 				this.counter = 0;
@@ -210,8 +199,10 @@ public class BST {
 				System.out.println("Element not found");
 			} // if else
 		} else {
+			// Tree with more than 1 node
 			Node node = this.root;
             boolean found = false;
+            boolean notFound = false;
             // Traverse BST
             while (found == false) {
                 // Check Left
@@ -221,6 +212,7 @@ public class BST {
                     } else {
                     	System.out.println("Element not found");
                         found = true;
+                        notFound = true;
                     } // if else
                 // Check Right
                 } else if (element > node.getKey()) {
@@ -229,6 +221,7 @@ public class BST {
                     } else {
                     	System.out.println("Element not found");
                         found = true;
+                        notFound = true;
                     } // if else
                 // Check Duplicate
                 } else if (element == node.getKey()) {
@@ -239,64 +232,44 @@ public class BST {
             // Account for node not in tree and bypass this logic
             // Account for root deletion in each case
             // Delete Node
-            if (node.getRight() == null && node.getLeft() == null) {
-            	// Node to delete is a leaf
-				if (node.getParent().getKey() < element) {
-					node.getParent().setRight(null);
+            if (notFound == false) {
+            	if (node.getRight() == null && node.getLeft() == null) {
+	            	// Node to delete is a leaf
+					if (node.getParent().getKey() < element) {
+						node.getParent().setRight(null);
+					} else {
+						node.getParent().setLeft(null);
+					} // if else
+					this.counter--;
+				} else if (node.getLeft() != null && node.getRight() == null) {
+					// Node to delete has one child on left
+					if (node.getParent().getKey() > element) {
+						node.getParent().setLeft(node.getLeft());
+					} else {
+							node.getParent().setRight(node.getLeft());
+					} // if else
+					// Set Child's Parent and decrement
+					node.getLeft().setParent(node.getParent());
+					this.counter--;
+				} else if (node.getRight() != null && node.getLeft() == null) {
+					// Node to delete has one child on right
+					if (node.getParent().getKey() > element) {
+						node.getParent().setLeft(node.getRight());
+					} else {
+						node.getParent().setRight(node.getRight());
+					} // if else
+					// Set Child's Parent and decrement
+					node.getRight().setParent(node.getParent());
+					this.counter--;
 				} else {
-					node.getParent().setLeft(null);
-				} // if else
-				node = null;
-				this.counter--;
-			} else if (node.getLeft() != null && node.getRight() == null) {
-				// Node to delete has one child on left
-				if (node.getParent().getKey() > element) {
-					node.getParent().setLeft(node.getLeft());
-				} else {
-						node.getParent().setRight(node.getLeft());
-				} // if else
-				this.counter--;
-			} else if (node.getRight() != null && node.getLeft() == null) {
-				// Node to delete has one child on right
-				if (node.getParent().getKey() > element) {
-					node.getParent().setLeft(node.getRight());
-				} else {
-					node.getParent().setRight(node.getRight());
-				} // if else
-				this.counter--;
-			} else {
-				// Node to delete has two children
-				/**
-				Node smallest = smallestHelper(node.getRight());
-				delete(smallest.getKey());
-				node.setKey(smallest.getKey());
-				*/
-				Node largest = largestHelper(node.getLeft());
-				this.delete(largest.getKey());
-				node.setKey(largest.getKey());
-			}// if else if else if else
+					// Node to delete has two children
+					Node largest = largestHelper(node.getLeft());
+					this.delete(largest.getKey());
+					node.setKey(largest.getKey());
+				}// if else if else if else
+            } // if the element is not found
 		} // if else if else
 	} // delete
-
-
-	/**
-	 * Print the largest key in the given subtree. Traverse recursively.
-	 * Mostly for debugging purposes in deletion implementation.
-	 */
-	public void getLargest() {
-		largestR(this.root);
-	} // largestR
-
-	/**
-	 * Recursive Helper Method for debugging and showing largest key in a subtree
-	 */
-	public void largestR(Node current) {
-		if (current.getRight() == null) {
-			System.out.println(current.getKey());
-			return;
-		} // if
-		largestR(current.getRight());
-	} // largestR
 
 	/**
 	 * Returns the node containing the largest key in the

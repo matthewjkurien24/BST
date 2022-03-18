@@ -259,7 +259,7 @@ public class Test {
 
         tree.preorder();
 
-        tree.delete(9);
+        tree.delete(8);
 
         System.out.println("\nExample 6: preorder traversal after a deleting a "
 
