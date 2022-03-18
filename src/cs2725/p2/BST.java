@@ -164,7 +164,6 @@ public class BST {
 				found = true;
 			} // if else if else if
 		} // while not found
-		// System.out.println(); // --------- Debug -----------
 
 		// Add new element
 		if (element < node.getKey()) {
