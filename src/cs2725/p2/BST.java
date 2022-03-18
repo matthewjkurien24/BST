@@ -145,7 +145,6 @@ public class BST {
 		// Traverse BST
 		while (found == false) {
 			// Check Left
-			//System.out.println(node.getKey()); // ------ Debug -------
 			if (element < node.getKey()) {
 				if (node.getLeft() != null) {
 					node = node.getLeft();
@@ -235,28 +234,40 @@ public class BST {
             if (notFound == false) {
             	if (node.getRight() == null && node.getLeft() == null) {
 	            	// Node to delete is a leaf
-					if (node.getParent().getKey() < element) {
-						node.getParent().setRight(null);
-					} else {
-						node.getParent().setLeft(null);
-					} // if else
+	            	if (node == this.root) {
+	            		root = null;
+	            	} else {
+	            		if (node.getParent().getKey() < element) {
+							node.getParent().setRight(null);
+						} else {
+							node.getParent().setLeft(null);
+						} // if else
+	            	} // if else
 					this.counter--;
 				} else if (node.getLeft() != null && node.getRight() == null) {
 					// Node to delete has one child on left
-					if (node.getParent().getKey() > element) {
-						node.getParent().setLeft(node.getLeft());
+					if (node == this.root) {
+						this.root = this.root.getLeft();
 					} else {
+						if (node.getParent().getKey() > element) {
+							node.getParent().setLeft(node.getLeft());
+						} else {
 							node.getParent().setRight(node.getLeft());
+						} // if else
 					} // if else
 					// Set Child's Parent and decrement
 					node.getLeft().setParent(node.getParent());
 					this.counter--;
 				} else if (node.getRight() != null && node.getLeft() == null) {
 					// Node to delete has one child on right
-					if (node.getParent().getKey() > element) {
-						node.getParent().setLeft(node.getRight());
+					if (node == this.root) {
+						this.root = this.root.getRight();
 					} else {
-						node.getParent().setRight(node.getRight());
+						if (node.getParent().getKey() > element) {
+							node.getParent().setLeft(node.getRight());
+						} else {
+							node.getParent().setRight(node.getRight());
+						} // if else
 					} // if else
 					// Set Child's Parent and decrement
 					node.getRight().setParent(node.getParent());
