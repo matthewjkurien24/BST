@@ -1,5 +1,3 @@
-package cs2725.p2;
-
 /**
  * Node class for holding integer and directing binary search
  */
