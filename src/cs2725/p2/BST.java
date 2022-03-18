@@ -187,12 +187,29 @@ public class BST {
 	 * "Element not found"
 	 */
 	public void delete(int element) throws NoSuchMethodException {
+		// Traverse to parent of node
+		// If target node left && right child = null, set target node to null
+		// else, if node has one child, replace the node to be deleted with its child
+		// else, find the node whose element immediately precedes that node to be deleted
+		// Replace the node to be deleted with the node that immediately precedes it
+
+		// Or do we replace the node with the largest element in the subtree?????
+		// Are they the same
+
+		// Slide 39 BST_Tree Traversal on eLC:
+		// Deleting a node with two children:
+		// Replace with Maximum node in the left subtree, or 
+		// the Minimum node with the right subtree.
+
+		// largestHelper(node.getLeft())
+
 		throw new NoSuchMethodException("Implement");
 	} // delete
 
 
 	/**
 	 * Print the largest key in the given subtree. Traverse recursively.
+	 * Mostly for debugging purposes in deletion implementation.
 	 */
 	public void getLargest() {
 		largestR(this.root);
