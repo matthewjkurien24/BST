@@ -186,7 +186,7 @@ public class BST {
 	 * If element not found, print
 	 * "Element not found"
 	 */
-	public void delete(int element) throws NoSuchMethodException {
+	public void delete(int element) {
 		// Traverse to parent of node
 		// If target node left && right child = null, set target node to null
 		// else, if node has one child, replace the node to be deleted with its child
@@ -203,7 +203,83 @@ public class BST {
 
 		// largestHelper(node.getLeft())
 
-		throw new NoSuchMethodException("Implement");
+
+
+		/**
+		if (this.counter == 0) {
+			System.out.println("Element not found");
+		} else if (this.counter == 1) {
+			if (this.root.getKey() == element) {
+				this.root = null;
+				this.counter = 0;
+			} else {
+				System.out.println("Element not found");
+			} // if else
+		} else {
+			// Traverse BST
+			while (found == false) {
+				// Check Left
+				//System.out.println(node.getKey()); // ------ Debug -------
+				if (element < node.getKey()) {
+					if (node.getLeft() != null) {
+						node = node.getLeft();
+					} else {
+						found = true;
+					} // if else
+				// Check Right
+				} else if (element > node.getKey()) {
+					if (node.getRight() != null) {
+						node = node.getRight();
+					} else {
+						found = true;
+					} // if else
+				// Check Duplicate
+				} else if (element == node.getKey()) {
+					System.out.println("Element is already in tree!");
+					found = true;
+				} // if else if else if
+			} // while not found
+			// System.out.println(); // --------- Debug -----------
+		} // if else if else
+		*/
+
+		if (this.counter == 0) {
+			System.out.println("Element not found");
+		} else if (this.counter == 1) {
+			if (this.root.getKey() == element) {
+				this.root = null;
+				this.counter = 0;
+			} else {
+				System.out.println("Element not found");
+			} // if else
+		} else {
+			Node node = this.root;
+            boolean found = false;
+            // Traverse BST
+            while (found == false) {
+                // Check Left
+                if (element < node.getKey()) {
+                    if (node.getLeft() != null) {
+                        node = node.getLeft(); 
+                    } else {
+                    	System.out.println("Element not found");
+                        found = true;
+                    } // if else
+                // Check Right
+                } else if (element > node.getKey()) {
+                    if (node.getRight() != null) {
+                        node = node.getRight();
+                    } else {
+                    	System.out.println("Element not found");
+                        found = true;
+                    } // if else
+                // Check Duplicate
+                } else if (element == node.getKey()) {
+                    System.out.println("Found");
+                    found = true;
+                } // if else if else if
+            } // while not found
+		} // if else if else
 	} // delete
 
 
@@ -260,41 +336,53 @@ public class BST {
 	/**
 	 * Traverse the tree in preorder recursively
 	 */
-	public void preorderHelper(Node current) {
+	private void preorderHelper(Node current) {
 		if (current == null) {
-			// System.out.println();
 			return;
-		}
-		System.out.println(current.getKey());
-		preorderHelper(current.getLeft());
-		preorderHelper(current.getRight());
+		} else {
+			System.out.print(current.getKey() + " ");
+			preorderHelper(current.getLeft());
+			preorderHelper(current.getRight());
+		} // if else
 	} // preorderHelper
 
 	/**
 	 * Print all elements according to postorder traversal
 	 */
-	public void postorder() throws NoSuchMethodException {
-		throw new NoSuchMethodException("Implement");
-	} // preorder
+	public void postorder() {
+		postorderHelper(this.root);
+	} // postorder
 
 	/**
 	 * Traverse the tree in postorder recursively
 	 */
-	public void postorderHelper(Node current) throws NoSuchMethodException {
-		throw new NoSuchMethodException("Implement");
+	private void postorderHelper(Node current) {
+		if (current == null) {
+			return;
+		} else {
+			postorderHelper(current.getLeft());
+			postorderHelper(current.getRight());
+			System.out.print(current.getKey() + " ");
+		} // if else
 	} // postorderHelper
 
 	/**
 	 * Print all elements according to inorder traversal
 	 */
-	public void inorder() throws NoSuchMethodException {
-		throw new NoSuchMethodException("Implement");
+	public void inorder() {
+		inorderHelper(this.root);
 	} // preorder
 
 	/**
 	 * Traverse the tree inorder recursively
 	 */
-	public void inorderHelper(Node current) throws NoSuchMethodException {
-		throw new NoSuchMethodException("Implement");
+	private void inorderHelper(Node current) {
+		if (current == null) {
+			return;
+		} else {
+			inorderHelper(current.getLeft());
+			System.out.print(current.getKey() + " ");
+			inorderHelper(current.getRight());
+		} // if else
 	} // inorderHelper
 } // BST
