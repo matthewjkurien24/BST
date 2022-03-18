@@ -222,6 +222,7 @@ public class BST {
 	 */
 	public Node largestHelper(Node current) {
 		boolean found = false;
+		// Traverse for largest node
 		while (found == false) {
 			if (current.getRight() != null) {
 				current = current.getRight();
@@ -279,7 +280,4 @@ public class BST {
 	public void inorderHelper(Node current) throws NoSuchMethodException {
 		throw new NoSuchMethodException("Implement");
 	} // inorderHelper
-
-
-
 } // BST
