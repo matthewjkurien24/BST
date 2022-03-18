@@ -172,12 +172,12 @@ public class BST {
 			// Add Left
 			node.setLeft(newNode);
 			newNode.setParent(node);
-			this.counter ++;
+			this.counter++;
 		} else {
 			// Add Right
 			node.setRight(newNode);
 			newNode.setParent(node);
-			this.counter ++;
+			this.counter++;
 		} // if else
 	} // insert
 
@@ -200,49 +200,6 @@ public class BST {
 		// Deleting a node with two children:
 		// Replace with Maximum node in the left subtree, or 
 		// the Minimum node with the right subtree.
-
-		// largestHelper(node.getLeft())
-
-
-
-		/**
-		if (this.counter == 0) {
-			System.out.println("Element not found");
-		} else if (this.counter == 1) {
-			if (this.root.getKey() == element) {
-				this.root = null;
-				this.counter = 0;
-			} else {
-				System.out.println("Element not found");
-			} // if else
-		} else {
-			// Traverse BST
-			while (found == false) {
-				// Check Left
-				//System.out.println(node.getKey()); // ------ Debug -------
-				if (element < node.getKey()) {
-					if (node.getLeft() != null) {
-						node = node.getLeft();
-					} else {
-						found = true;
-					} // if else
-				// Check Right
-				} else if (element > node.getKey()) {
-					if (node.getRight() != null) {
-						node = node.getRight();
-					} else {
-						found = true;
-					} // if else
-				// Check Duplicate
-				} else if (element == node.getKey()) {
-					System.out.println("Element is already in tree!");
-					found = true;
-				} // if else if else if
-			} // while not found
-			// System.out.println(); // --------- Debug -----------
-		} // if else if else
-		*/
-
 		if (this.counter == 0) {
 			System.out.println("Element not found");
 		} else if (this.counter == 1) {
@@ -260,7 +217,7 @@ public class BST {
                 // Check Left
                 if (element < node.getKey()) {
                     if (node.getLeft() != null) {
-                        node = node.getLeft(); 
+                        node = node.getLeft();
                     } else {
                     	System.out.println("Element not found");
                         found = true;
@@ -275,11 +232,49 @@ public class BST {
                     } // if else
                 // Check Duplicate
                 } else if (element == node.getKey()) {
-                    System.out.println("Found");
                     found = true;
                 } // if else if else if
             } // while not found
-            System.out.println("Key Retreived: " + node.getKey());
+
+            // Account for node not in tree and bypass this logic
+            // Account for root deletion in each case
+            // Delete Node
+            if (node.getRight() == null && node.getLeft() == null) {
+            	// Node to delete is a leaf
+				if (node.getParent().getKey() < element) {
+					node.getParent().setRight(null);
+				} else {
+					node.getParent().setLeft(null);
+				} // if else
+				node = null;
+				this.counter--;
+			} else if (node.getLeft() != null && node.getRight() == null) {
+				// Node to delete has one child on left
+				if (node.getParent().getKey() > element) {
+					node.getParent().setLeft(node.getLeft());
+				} else {
+						node.getParent().setRight(node.getLeft());
+				} // if else
+				this.counter--;
+			} else if (node.getRight() != null && node.getLeft() == null) {
+				// Node to delete has one child on right
+				if (node.getParent().getKey() > element) {
+					node.getParent().setLeft(node.getRight());
+				} else {
+					node.getParent().setRight(node.getRight());
+				} // if else
+				this.counter--;
+			} else {
+				// Node to delete has two children
+				/**
+				Node smallest = smallestHelper(node.getRight());
+				delete(smallest.getKey());
+				node.setKey(smallest.getKey());
+				*/
+				Node largest = largestHelper(node.getLeft());
+				this.delete(largest.getKey());
+				node.setKey(largest.getKey());
+			}// if else if else if else
 		} // if else if else
 	} // delete
 
@@ -320,6 +315,22 @@ public class BST {
 		while (found == false) {
 			if (current.getRight() != null) {
 				current = current.getRight();
+			} else {
+				found = true;
+			} // if else
+		} // while not found
+		return current;
+	} // largest
+
+	/**
+	 * Helper method for traversing to the smallest key node
+	 */
+	public Node smallestHelper(Node current) {
+		boolean found = false;
+		// Traverse for smallest node
+		while (found == false) {
+			if (current.getLeft() != null) {
+				current = current.getLeft();
 			} else {
 				found = true;
 			} // if else
