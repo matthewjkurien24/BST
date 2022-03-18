@@ -119,6 +119,7 @@ public class Test {
 			System.out.println("Failed, Size=" + bst.size());
 		} // if else
 
+		/** Insert Debugging
 		bst.insert(5);
 		bst.insert(6);
 		bst.insert(7);
@@ -153,6 +154,27 @@ public class Test {
 		bst2.insert(35);
 		bst2.insert(33);
 		bst2.insert(37);
+		*/
+
+		BST bst1 = new BST();
+		bst1.insert(8);
+		bst1.insert(3);
+		bst1.insert(1);
+		bst1.insert(6);
+		bst1.insert(4);
+		bst1.insert(7);
+		bst1.insert(10);
+		bst1.insert(14);
+		bst1.insert(13);
+
+
+		bst1.preorder();
+
+		System.out.println();
+
+		bst1.getLargest();
+		Node nodeLargest = bst1.largest();
+		System.out.println(nodeLargest.getKey());
 
 
 

@@ -145,7 +145,7 @@ public class BST {
 		// Traverse BST
 		while (found == false) {
 			// Check Left
-			System.out.println(node.getKey()); // ------ Debug -------
+			//System.out.println(node.getKey()); // ------ Debug -------
 			if (element < node.getKey()) {
 				if (node.getLeft() != null) {
 					node = node.getLeft();
@@ -165,7 +165,7 @@ public class BST {
 				found = true;
 			} // if else if else if
 		} // while not found
-		System.out.println();
+		// System.out.println(); // --------- Debug -----------
 
 		// Add new element
 		if (element < node.getKey()) {
@@ -190,18 +190,66 @@ public class BST {
 		throw new NoSuchMethodException("Implement");
 	} // delete
 
+
+	/**
+	 * Print the largest key in the given subtree. Traverse recursively.
+	 */
+	public void getLargest() {
+		largestR(this.root);
+	} // largestR
+
+	/**
+	 * Recursive Helper Method for debugging and showing largest key in a subtree
+	 */
+	public void largestR(Node current) {
+		if (current.getRight() == null) {
+			System.out.println(current.getKey());
+			return;
+		} // if
+		largestR(current.getRight());
+	} // largestR
+
+	/**
+	 * Returns the node containing the largest key in the
+	 * given subtree.
+	 */
+	public Node largest() {
+		return largestHelper(this.root);
+	} // largest
+
+	/**
+	 * Helper method for traversing to the largest key node
+	 */
+	public Node largestHelper(Node current) {
+		boolean found = false;
+		while (found == false) {
+			if (current.getRight() != null) {
+				current = current.getRight();
+			} else {
+				found = true;
+			} // if else
+		} // while not found
+		return current;
+	} // largest
+
 	/**
 	 * Print all elements according to preorder traversal
 	 */
-	public void preorder() throws NoSuchMethodException {
-		throw new NoSuchMethodException("Implement");
+	public void preorder() {
+		preorderHelper(this.root);
 	} // preorder
 
 	/**
 	 * Traverse the tree in preorder recursively
 	 */
-	public void preorderHelper(Node current) throws NoSuchMethodException {
-		throw new NoSuchMethodException("Implement");
+	public void preorderHelper(Node current) {
+		if (current == null) {
+			// System.out.println();
+			return;
+		}
+		System.out.println(current.getKey());
+		preorderHelper(current.getLeft());
+		preorderHelper(current.getRight());
 	} // preorderHelper
 
 	/**
