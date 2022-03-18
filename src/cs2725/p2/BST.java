@@ -279,6 +279,7 @@ public class BST {
                     found = true;
                 } // if else if else if
             } // while not found
+            System.out.println("Key Retreived: " + node.getKey());
 		} // if else if else
 	} // delete
 
